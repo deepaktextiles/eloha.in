@@ -208,16 +208,14 @@
   .arch-card__frame {
     position: relative;
     width: 100%;
-    border-radius: 9999px 9999px 0 0;
-    border: var(--arch-border-width, 2px) solid var(--arch-border-color, #d4a34b);
-    padding: var(--arch-border-gap, 10px);
-    background-color: var(--arch-card-bg, #ffffff);
+ 
+ 
+
     box-sizing: border-box;
     transition: box-shadow 0.35s ease, border-color 0.35s ease;
   }
 
   .arch-card:hover .arch-card__frame {
-    box-shadow: 0 10px 24px rgba(212, 163, 75, 0.2);
   }
 
   /* Inner Image Container matching the Arch Shape */
@@ -227,14 +225,14 @@
     height: var(--arch-card-height, 430px);
     border-radius: 9999px 9999px 0 0;
     overflow: hidden;
-    background: #f8f6f2;
+    
     display: block;
   }
 
   .arch-card__image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
