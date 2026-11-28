@@ -1,0 +1,692 @@
+{% comment %}
+  Improved Teapoz Footer - Single Line Payments + Custom SVG Social Icons + Mobile Accordion + Logo + Fully Customizable Colors
+{% endcomment %}
+
+{%- liquid
+  assign footer_bg = section.settings.section_bg | default: '#ffffff'
+  assign footer_heading = section.settings.heading_color | default: '#1a1a1a'
+  assign footer_text = section.settings.text_color | default: '#4a4a4a'
+  assign footer_link = section.settings.link_color | default: '#2d2d2d'
+  assign footer_hover = section.settings.link_hover_color | default: '#8bc34a'
+  assign footer_contact = section.settings.contact_color | default: footer_text
+  assign footer_bottom = section.settings.bottom_text_color | default: '#777777'
+  assign footer_back_top = section.settings.back_top_color | default: '#8bc34a'
+  assign footer_border = section.settings.border_color | default: '#e5e5e5'
+
+  assign footer_logo = section.settings.logo
+  if footer_logo == blank
+    assign footer_logo = settings.logo_inverse | default: settings.logo
+  endif
+
+  assign logo_width = section.settings.logo_width | default: 140
+  assign logo_width_2x = logo_width | times: 2
+  assign logo_width_3x = logo_width | times: 3
+  if footer_logo != blank and footer_logo.aspect_ratio != blank and footer_logo.aspect_ratio > 0
+    assign logo_height = logo_width | divided_by: footer_logo.aspect_ratio | round
+  else
+    assign logo_height = 'auto'
+  endif
+-%}
+
+<div class="bg-section section" style="
+  --footer-bg: {{ footer_bg }};
+  --footer-heading: {{ footer_heading }};
+  --footer-text: {{ footer_text }};
+  --footer-link: {{ footer_link }};
+  --footer-hover: {{ footer_hover }};
+  --footer-contact: {{ footer_contact }};
+  --footer-bottom: {{ footer_bottom }};
+  --footer-back-top: {{ footer_back_top }};
+  --footer-border: {{ footer_border }};
+">
+  {%- if section.settings.show_logo and footer_logo != blank and section.settings.logo_position == 'top' -%}
+    <div class="footer-logo footer-logo--top" style="--footer-logo-align: {{ section.settings.logo_alignment | default: 'left' }};">
+      <a href="{{ routes.root_url }}">
+        <img
+          src="{{ footer_logo | image_url: width: logo_width_2x }}"
+          srcset="{{ footer_logo | image_url: width: logo_width }} 1x, {{ footer_logo | image_url: width: logo_width_2x }} 2x, {{ footer_logo | image_url: width: logo_width_3x }} 3x"
+          alt="{{ footer_logo.alt | default: shop.name | escape }}"
+          width="{{ logo_width }}"
+          height="{{ logo_height }}"
+          style="max-width: {{ logo_width }}px; width: 100%; height: auto; object-fit: contain;"
+          loading="lazy"
+        >
+      </a>
+    </div>
+  {%- endif -%}
+
+  <div class="teapoz-footer">
+
+    <!-- ABOUT (Column 1) -->
+    <div class="footer-column footer-column--about">
+      {%- if section.settings.show_logo and footer_logo != blank and section.settings.logo_position != 'top' -%}
+        <div class="footer-logo footer-logo--about" style="--footer-logo-align: {{ section.settings.logo_alignment | default: 'left' }};">
+          <a href="{{ routes.root_url }}">
+            <img
+              src="{{ footer_logo | image_url: width: logo_width_2x }}"
+              srcset="{{ footer_logo | image_url: width: logo_width }} 1x, {{ footer_logo | image_url: width: logo_width_2x }} 2x, {{ footer_logo | image_url: width: logo_width_3x }} 3x"
+              alt="{{ footer_logo.alt | default: shop.name | escape }}"
+              width="{{ logo_width }}"
+              height="{{ logo_height }}"
+              style="max-width: {{ logo_width }}px; width: 100%; height: auto; object-fit: contain;"
+              loading="lazy"
+            >
+          </a>
+        </div>
+      {%- endif -%}
+
+      <div class="footer-heading" data-accordion-header>
+        <h4>{{ section.settings.about_heading | default: 'ABOUT' }}</h4>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="footer-content">
+        <p>{{ section.settings.about_text }}</p>
+        
+        <!-- Payment Icons - Single Line -->
+        <div class="payments-single">
+          {% for block in section.blocks %}
+            {% if block.type == 'payment' and block.settings.icon != blank %}
+              <img src="{{ block.settings.icon | image_url: width: 120 }}" 
+                   alt="Payment Method" 
+                   loading="lazy">
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES (Column 2) -->
+    <div class="footer-column footer-column--categories">
+      <div class="footer-heading" data-accordion-header>
+        <h4>{{ section.settings.categories_heading | default: 'CATEGORIES' }}</h4>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="footer-content">
+        <ul>
+          {% for link in section.settings.categories_menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- INFORMATIONS (Column 3) -->
+    <div class="footer-column footer-column--information">
+      <div class="footer-heading" data-accordion-header>
+        <h4>{{ section.settings.information_heading | default: 'INFORMATIONS' }}</h4>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="footer-content">
+        <ul>
+          {% for link in section.settings.information_menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONTACT + SOCIAL (Column 4) -->
+    <div class="footer-column footer-column--contact active">
+      <div class="footer-heading" data-accordion-header>
+        <h4>{{ section.settings.contact_heading | default: 'CONTACT' }}</h4>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="footer-content">
+        {% if section.settings.address != blank %}
+          <p><strong>Address:</strong><br>{{ section.settings.address }}</p>
+        {% endif %}
+
+        {% if section.settings.phone != blank %}
+          <p><strong>Phone:</strong> {{ section.settings.phone }}</p>
+        {% endif %}
+
+        {% if section.settings.email != blank %}
+          <p class="footer-email"><a href="mailto:{{ section.settings.email }}"><strong>Email:</strong> {{ section.settings.email }}</a></p>
+        {% endif %}
+
+        <!-- Social Icons -->
+        <div class="social-custom">
+          {% if section.settings.facebook_svg != blank and section.settings.facebook_link != blank %}
+            <a href="{{ section.settings.facebook_link }}" target="_blank" aria-label="Facebook">
+              <img src="{{ section.settings.facebook_svg | image_url }}" alt="Facebook">
+            </a>
+          {% endif %}
+
+          {% if section.settings.instagram_svg != blank and section.settings.instagram_link != blank %}
+            <a href="{{ section.settings.instagram_link }}" target="_blank" aria-label="Instagram">
+              <img src="{{ section.settings.instagram_svg | image_url }}" alt="Instagram">
+            </a>
+          {% endif %}
+
+          {% if section.settings.twitter_svg != blank and section.settings.twitter_link != blank %}
+            <a href="{{ section.settings.twitter_link }}" target="_blank" aria-label="Twitter">
+              <img src="{{ section.settings.twitter_svg | image_url }}" alt="Twitter">
+            </a>
+          {% endif %}
+
+          {% if section.settings.linkedin_svg != blank and section.settings.linkedin_link != blank %}
+            <a href="{{ section.settings.linkedin_link }}" target="_blank" aria-label="LinkedIn">
+              <img src="{{ section.settings.linkedin_svg | image_url }}" alt="LinkedIn">
+            </a>
+          {% endif %}
+
+          {% if section.settings.whatsapp_svg != blank and section.settings.whatsapp_link != blank %}
+            <a href="{{ section.settings.whatsapp_link }}" target="_blank" aria-label="WhatsApp">
+              <img src="{{ section.settings.whatsapp_svg | image_url }}" alt="WhatsApp">
+            </a>
+          {% endif %}
+
+          {% if section.settings.youtube_svg != blank and section.settings.youtube_link != blank %}
+            <a href="{{ section.settings.youtube_link }}" target="_blank" aria-label="YouTube">
+              <img src="{{ section.settings.youtube_svg | image_url }}" alt="YouTube">
+            </a>
+          {% endif %}
+
+          {% if section.settings.pinterest_svg != blank and section.settings.pinterest_link != blank %}
+            <a href="{{ section.settings.pinterest_link }}" target="_blank" aria-label="Pinterest">
+              <img src="{{ section.settings.pinterest_svg | image_url }}" alt="Pinterest">
+            </a>
+          {% endif %}
+
+          {% if section.settings.threads_svg != blank and section.settings.threads_link != blank %}
+            <a href="{{ section.settings.threads_link }}" target="_blank" aria-label="Threads">
+              <img src="{{ section.settings.threads_svg | image_url }}" alt="Threads">
+            </a>
+          {% endif %}
+
+          {% comment %} Dynamic Custom Social Blocks {% endcomment %}
+          {% for block in section.blocks %}
+            {% if block.type == 'social_icon' and block.settings.icon != blank and block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" target="_blank" aria-label="{{ block.settings.title | default: 'Social' }}" {{ block.shopify_attributes }}>
+                <img src="{{ block.settings.icon | image_url }}" alt="{{ block.settings.title | default: 'Social' }}">
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <a href="#" class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      BACK TO TOP ↑
+    </a>
+    <p>Copyright © {{ 'now' | date: "%Y" }} {{ shop.name }} . All rights reserved. Eloha </p>
+  </div>
+</div>
+
+<style>
+  .bg-section {
+    background: var(--footer-bg) !important;
+    color: var(--footer-text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Logo Styles */
+  .footer-logo {
+    text-align: var(--footer-logo-align, left);
+    margin-bottom: 20px;
+  }
+
+  .footer-logo a {
+    display: inline-block;
+    line-height: 0;
+  }
+
+  .footer-logo img {
+    height: auto;
+    object-fit: contain;
+    display: inline-block;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  .footer-logo--top {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    padding: 50px 20px 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .teapoz-footer {
+    position: relative;
+    z-index: 1;
+    padding: 60px 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px 30px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Heading & Accordion */
+  .footer-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 0;
+  }
+
+  .footer-column h4 {
+    color: var(--footer-heading) !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .accordion-icon {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--footer-heading) !important;
+    transition: transform 0.3s ease;
+  }
+
+  .footer-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  /* Paragraphs & About Text */
+  .footer-column p { 
+    font-size: 14px; 
+    line-height: 1.6; 
+    margin-bottom: 15px; 
+    color: var(--footer-text) !important;
+  }
+
+  /* Menu Links */
+  .footer-column ul { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+  }
+  .footer-column li { 
+    margin-bottom: 10px; 
+  }
+  .footer-column a { 
+    color: var(--footer-link) !important; 
+    text-decoration: none; 
+    transition: color 0.2s ease; 
+  }
+  .footer-column a:hover { 
+    color: var(--footer-hover) !important; 
+  }
+
+  /* Contact info & Email */
+  .footer-column--contact p {
+    color: var(--footer-contact) !important;
+  }
+  .footer-column--contact p strong {
+    color: var(--footer-heading) !important;
+  }
+  .footer-email a {
+    color: var(--footer-contact) !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer-email a strong {
+    color: var(--footer-heading) !important;
+  }
+  .footer-email a:hover,
+  .footer-email a:hover strong {
+    color: var(--footer-hover) !important;
+  }
+
+  /* Desktop: Show content normally */
+  @media (min-width: 769px) {
+    .footer-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: default;
+      padding: 0 0 15px 0;
+    }
+    .footer-heading .accordion-icon {
+      display: none;
+    }
+    .footer-content {
+      max-height: none;
+      overflow: visible;
+    }
+  }
+
+  /* Mobile Accordion */
+  @media (max-width: 768px) {
+    .footer-logo--top {
+      padding: 30px 15px 0;
+      text-align: center;
+    }
+
+    .footer-logo--about {
+      padding: 8px 4px 4px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .teapoz-footer { 
+      grid-template-columns: 1fr; 
+      gap:10px !important;
+      padding: 40px 0px 23px;
+    }
+
+    .footer-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 5px 0;
+    }
+
+    .footer-content {
+      padding-bottom: 0px;
+    }
+
+    .footer-column {
+      border: 1px solid var(--footer-border);
+      padding: 5px 10px;
+      margin: 1px;
+      border-radius:15px;
+    }
+
+    .payments-single {
+      justify-content: center;
+      margin: 15px 0 20px 0;
+    }
+
+    .social-custom {
+      justify-content: center;
+      margin-top: 15px;
+    }
+  }
+
+  /* Active State */
+  .footer-column.active .accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  .footer-column.active .footer-content {
+    max-height: 500px;
+  }
+
+  .payments-single {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0 25px 0;
+  }
+
+  .payments-single img {
+    height: 38px;
+    background: #fff;
+    padding: 5px;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  .social-custom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .social-custom a {
+    display: block;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .social-custom a:hover {
+    transform: scale(1.1);
+  }
+
+  .social-custom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Footer Bottom */
+  .footer-bottom {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 25px 20px 35px;
+    border-top: 1px solid var(--footer-border);
+    font-size: 13.5px;
+    color: var(--footer-bottom) !important;
+  }
+
+  .footer-bottom p {
+    color: var(--footer-bottom) !important;
+    margin: 0;
+  }
+
+  .back-top {
+    color: var(--footer-back-top) !important;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 12px;
+    transition: color 0.2s ease;
+  }
+  .back-top:hover {
+    color: var(--footer-heading) !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const headers = document.querySelectorAll('.footer-heading');
+
+    headers.forEach(header => {
+      header.addEventListener('click', function() {
+        const column = this.parentElement;
+        column.classList.toggle('active');
+      });
+    });
+
+    // Only open the contact accordion by default on mobile
+    if (window.innerWidth <= 768) {
+      const contactColumn = document.querySelector('.footer-column--contact');
+      if (contactColumn) contactColumn.classList.add('active');
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Improved Teapoz Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings Color (ABOUT, CATEGORIES, etc.)",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "About / Body Text Color (Lorem ipsum...)",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Menu Links Color (Festive Wear, Mega 01...)",
+      "default": "#2D2D2D"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Menu Links Hover Color",
+      "default": "#8BC34A"
+    },
+    {
+      "type": "color",
+      "id": "contact_color",
+      "label": "Contact Info Color (Address, Phone, Email)",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "bottom_text_color",
+      "label": "Bottom Copyright Text Color",
+      "default": "#777777"
+    },
+    {
+      "type": "color",
+      "id": "back_top_color",
+      "label": "Back To Top Button Color",
+      "default": "#8BC34A"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Borders & Divider Line Color",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "header",
+      "content": "Footer Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show Logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo",
+      "info": "Leave blank to use the store logo from Theme Settings."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width",
+      "min": 50,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo Position",
+      "options": [
+        {
+          "value": "about",
+          "label": "Inside About Column"
+        },
+        {
+          "value": "top",
+          "label": "Top of Footer"
+        }
+      ],
+      "default": "about"
+    },
+    {
+      "type": "select",
+      "id": "logo_alignment",
+      "label": "Logo Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    { "type": "header", "content": "About Section" },
+    { "type": "text", "id": "about_heading", "label": "About Heading", "default": "ABOUT" },
+    { "type": "textarea", "id": "about_text", "label": "About Text", "default": "Lorem ipsum dolor sit amet..." },
+
+    { "type": "header", "content": "Categories Section" },
+    { "type": "text", "id": "categories_heading", "label": "Categories Heading", "default": "CATEGORIES" },
+    { "type": "link_list", "id": "categories_menu", "label": "Categories Menu" },
+
+    { "type": "header", "content": "Information Section" },
+    { "type": "text", "id": "information_heading", "label": "Informations Heading", "default": "INFORMATIONS" },
+    { "type": "link_list", "id": "information_menu", "label": "Informations Menu" },
+
+    { "type": "header", "content": "Contact Section" },
+    { "type": "text", "id": "contact_heading", "label": "Contact Heading", "default": "CONTACT" },
+    { "type": "textarea", "id": "address", "label": "Address", "info": "Full address with pin code" },
+    { "type": "text", "id": "phone", "label": "Phone Number" },
+    { "type": "text", "id": "email", "label": "Email Address" },
+
+    { "type": "header", "content": "Social Icons (Upload SVG + Link)" },
+    { "type": "image_picker", "id": "facebook_svg", "label": "Facebook SVG Icon" },
+    { "type": "url", "id": "facebook_link", "label": "Facebook Link" },
+
+    { "type": "image_picker", "id": "instagram_svg", "label": "Instagram SVG Icon" },
+    { "type": "url", "id": "instagram_link", "label": "Instagram Link" },
+
+    { "type": "image_picker", "id": "twitter_svg", "label": "Twitter / X SVG Icon" },
+    { "type": "url", "id": "twitter_link", "label": "Twitter Link" },
+
+    { "type": "image_picker", "id": "linkedin_svg", "label": "LinkedIn SVG Icon" },
+    { "type": "url", "id": "linkedin_link", "label": "LinkedIn Link" },
+
+    { "type": "image_picker", "id": "whatsapp_svg", "label": "WhatsApp SVG Icon" },
+    { "type": "url", "id": "whatsapp_link", "label": "WhatsApp Link" },
+
+    { "type": "image_picker", "id": "youtube_svg", "label": "YouTube SVG Icon" },
+    { "type": "url", "id": "youtube_link", "label": "YouTube Link" },
+
+    { "type": "image_picker", "id": "pinterest_svg", "label": "Pinterest SVG Icon" },
+    { "type": "url", "id": "pinterest_link", "label": "Pinterest Link" },
+
+    { "type": "image_picker", "id": "threads_svg", "label": "Threads SVG Icon" },
+    { "type": "url", "id": "threads_link", "label": "Threads Link" }
+  ],
+  "blocks": [
+    {
+      "type": "payment",
+      "name": "Payment Icon",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Upload Payment Icon (PNG/SVG)" }
+      ]
+    },
+    {
+      "type": "social_icon",
+      "name": "+ Custom Social Icon",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Platform Name (e.g. YouTube, Spotify)", "default": "Social" },
+        { "type": "image_picker", "id": "icon", "label": "Upload Icon (SVG/PNG)" },
+        { "type": "url", "id": "link", "label": "Social Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Improved Teapoz Footer" }]
+}
+{% endschema %}

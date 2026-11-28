@@ -1,0 +1,810 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slider_banner_NUGYpr": {
+      "type": "sliderBanner",
+      "blocks": {
+        "banner_zRKtTh": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Frame_1.png",
+            "banner_link": ""
+          }
+        },
+        "banner_mQAELT": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Frame_6.png",
+            "banner_link": ""
+          }
+        },
+        "banner_FmegLF": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Frame_4.png",
+            "banner_link": ""
+          }
+        },
+        "banner_Y6DmUY": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Madhubani_Project_Report_Cover.png",
+            "banner_link": ""
+          }
+        },
+        "banner_qNUz9k": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Frame_3.png",
+            "banner_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "banner_zRKtTh",
+        "banner_mQAELT",
+        "banner_FmegLF",
+        "banner_Y6DmUY",
+        "banner_qNUz9k"
+      ],
+      "name": "Eloha Hero Carousel",
+      "settings": {}
+    },
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "text_YLPk4p": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Browse our latest products</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_H9gpTf": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop all",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "rgba(0,0,0,0)",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_YLPk4p",
+        "button_H9gpTf"
+      ],
+      "disabled": true,
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "background_color": "rgba(0,0,0,0)",
+        "toggle_overlay": true,
+        "overlay_color": "#12121266",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 72
+      }
+    },
+    "price_badges_Jwfxkk": {
+      "type": "PriceBadges",
+      "blocks": {
+        "price_card_86L4hP": {
+          "type": "price_card",
+          "settings": {
+            "image": "shopify://shop_images/699_1.gif",
+            "link": "",
+            "title": "699"
+          }
+        },
+        "price_card_CVHdAW": {
+          "type": "price_card",
+          "settings": {
+            "image": "shopify://shop_images/799_1.gif",
+            "link": "",
+            "title": "799"
+          }
+        },
+        "price_card_9NXHFW": {
+          "type": "price_card",
+          "settings": {
+            "image": "shopify://shop_images/999_1.gif",
+            "link": "",
+            "title": "999"
+          }
+        }
+      },
+      "block_order": [
+        "price_card_86L4hP",
+        "price_card_CVHdAW",
+        "price_card_9NXHFW"
+      ],
+      "name": "Price Badges",
+      "settings": {
+        "heading": "DIWALI'S BEST PRICES",
+        "background_color": "#faf6ee",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "arch_slider_diwali": {
+      "type": "arch-slider",
+      "blocks": {
+        "arch_slide_1": {
+          "type": "arch_slide",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_1.png",
+            "link": "",
+            "title": "",
+            "subtitle": ""
+          }
+        },
+        "arch_slide_2": {
+          "type": "arch_slide",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3.png",
+            "link": "",
+            "title": "",
+            "subtitle": ""
+          }
+        },
+        "arch_slide_3": {
+          "type": "arch_slide",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_4.png",
+            "link": "",
+            "title": "",
+            "subtitle": ""
+          }
+        },
+        "arch_slide_4": {
+          "type": "arch_slide",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_2.png",
+            "link": "",
+            "title": "",
+            "subtitle": ""
+          }
+        },
+        "arch_slide_5": {
+          "type": "arch_slide",
+          "settings": {
+            "image": "shopify://shop_images/SUITS_36fa4a4f-5680-41c6-8007-20bbba25f37b.jpg",
+            "link": "",
+            "title": "",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "arch_slide_1",
+        "arch_slide_2",
+        "arch_slide_3",
+        "arch_slide_4",
+        "arch_slide_5"
+      ],
+      "name": "Arch Slider - Diwali",
+      "settings": {
+        "heading": "DIWALI'S BEST PRICES",
+        "subheading": "",
+        "heading_alignment": "center",
+        "border_color": "#d4a34b",
+        "border_width": 2,
+        "border_gap": 10,
+        "card_bg_color": "#ffffff",
+        "card_height_desktop": 430,
+        "card_height_mobile": 270,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#666666",
+        "title_color": "#1a1a1a",
+        "columns_desktop": 4,
+        "columns_tablet": 3,
+        "columns_mobile": "1.25",
+        "card_gap": 22,
+        "enable_loop": false,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "show_arrows": true,
+        "arrow_bg_color": "#ffffff",
+        "arrow_color": "#1a1a1a",
+        "arrow_border_color": "#e2ddd8",
+        "arrow_hover_bg": "#1a1a1a",
+        "arrow_hover_color": "#ffffff",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<p>ELOHA · CLOTHING FOR A STRONGER YOU</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 2,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "judge_me_reviews_preview_badge_9exG4Q": {
+              "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+              "settings": {}
+            },
+            "custom_liquid_pAxrxL": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "<div class=\"eloha-hld-stamp el oha-hld-stamp--edd\" data-eloha-hld-stamp>\n  <img\n    class=\"eloha-hld-stamp__icon\"\n    src=\"https://cdn.shopify.com/s/files/1/1101/2636/7006/files/ex_1.png?v=1793261802\"\n    alt=\"\"\n    loading=\"lazy\"\n    decoding=\"async\"\n    width=\"48\"\n    height=\"15\"\n    aria-hidden=\"true\"\n  >\n  <span class=\"eloha-hld-stamp__text\">Express Delivery</span>\n</div>\n\n<style>\n  .eloha-hld-stamp--edd {\n    color: #555;\n    font-weight: 600;\n  }\n\n  .eloha-hld-stamp {\n    display: inline-flex;\n    align-items: center;\n    justify-content: flex-start;\n    gap: 6px;\n    margin-top: 5px;\n    color: #71006a;\n    font-size: 11px;\n    font-weight: 600;\n    line-height: 1;\n    letter-spacing: 0;\n    text-align: left;\n    text-transform: none;\n    vertical-align: top;\n  }\n\n.eloha-hld-stamp__icon {\n    display: block;\n    width: 24px !important;\n    height: 15px;\n    object-fit: contain;\n    flex-shrink: 0;\n}\n\n  .eloha-hld-stamp--edd .eloha-hld-stamp__text {\n    color: #555;\n  }\n\n  .eloha-hld-stamp__text {\n    display: inline-flex;\n    align-items: center;\n    min-height: 16px;\n    color: #71006a;\n    letter-spacing: 0;\n    line-height: 1;\n    white-space: normal;\n  }\n</style>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4",
+            "judge_me_reviews_preview_badge_9exG4Q",
+            "custom_liquid_pAxrxL"
+          ]
+        }
+      },
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 10,
+        "padding-block-end": 48
+      }
+    },
+    "custom_image_cards_RcjwAR": {
+      "type": "custom-image-cards",
+      "blocks": {
+        "card_HiE39V": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TP20044T-2_666d9189-d45a-4152-ac6c-6029b3949033.jpg",
+            "card_link": "",
+            "button_text": "Shop Now",
+            "btn_bg_color": "",
+            "btn_text_color": "",
+            "btn_border_color": ""
+          }
+        },
+        "card_JaJ7Te": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TP20044T-2_666d9189-d45a-4152-ac6c-6029b3949033.jpg",
+            "card_link": "",
+            "button_text": "Shop Now",
+            "btn_bg_color": "",
+            "btn_text_color": "",
+            "btn_border_color": ""
+          }
+        },
+        "card_DRn7L8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TP9343T-2_f3a2ca4d-ccec-4595-8cbf-f0c490d361fa.jpg",
+            "card_link": "",
+            "button_text": "Shop Now",
+            "btn_bg_color": "",
+            "btn_text_color": "",
+            "btn_border_color": ""
+          }
+        },
+        "card_bQitA4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TP4087T-10__3pc__Top-3_ef6590b9-3636-4224-8b4e-cc4d113bc7e0.jpg",
+            "card_link": "",
+            "button_text": "Shop Now",
+            "btn_bg_color": "",
+            "btn_text_color": "",
+            "btn_border_color": ""
+          }
+        },
+        "card_5thItem": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TP20044T-2_666d9189-d45a-4152-ac6c-6029b3949033.jpg",
+            "card_link": "",
+            "button_text": "Shop Now",
+            "btn_bg_color": "",
+            "btn_text_color": "",
+            "btn_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_HiE39V",
+        "card_JaJ7Te",
+        "card_DRn7L8",
+        "card_bQitA4",
+        "card_5thItem"
+      ],
+      "name": "Custom Image Cards",
+      "settings": {
+        "heading": "Why Choose Eloha",
+        "paragraph": "",
+        "columns_desktop": 4,
+        "columns_tablet": 3,
+        "columns_mobile": "1.15",
+        "show_arrows": true,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "enable_loop": false,
+        "btn_bg_color": "#000000",
+        "btn_text_color": "#ffffff",
+        "btn_border_color": "#000000",
+        "btn_hover_bg_color": "rgba(0,0,0,0)",
+        "btn_hover_text_color": "#000000",
+        "btn_hover_border_color": "#000000",
+        "card_button_wrap_bg": "#ffffff"
+      }
+    },
+    "shop_by_categories_7FCqJU": {
+      "type": "shopByCategories",
+      "blocks": {
+        "category_card_PaRbBU": {
+          "type": "category_card",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_8_2.png",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_card_REijAk": {
+          "type": "category_card",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_7_1.png",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_card_KhMDax": {
+          "type": "category_card",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_1.png",
+            "title": "Category",
+            "link": ""
+          }
+        },
+        "category_card_aRipbn": {
+          "type": "category_card",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_9_1.png",
+            "title": "SUITS",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_card_PaRbBU",
+        "category_card_REijAk",
+        "category_card_KhMDax",
+        "category_card_aRipbn"
+      ],
+      "name": "Shop By Categories",
+      "settings": {
+        "heading": "SHOP BY CATEGORIES",
+        "background_color": "#103023",
+        "heading_color": "#ffffff",
+        "title_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "columns_desktop": 4,
+        "columns_tablet": 4,
+        "columns_mobile": "1.2",
+        "card_gap": 20,
+        "card_height_desktop": 390,
+        "card_height_mobile": 250,
+        "enable_loop": true,
+        "autoplay": true,
+        "autoplay_speed": 3,
+        "show_arrows": true,
+        "arrow_bg_color": "#ffffff",
+        "arrow_color": "#1a1a1a",
+        "arrow_border_color": "#e2ddd8",
+        "arrow_hover_bg": "#1a1a1a",
+        "arrow_hover_color": "#ffffff"
+      }
+    },
+    "story_showcase_banner": {
+      "type": "story-showcase",
+      "name": "Story Showcase Banner",
+      "settings": {
+        "section_width": "full",
+        "image_position": "left",
+        "desktop_height": 680,
+        "main_image": "shopify://shop_images/Rectangle_10.png",
+        "heading": "EVERY DETAIL\nTELLS A STORY. EVERY\nLEHENGA MAKES YOU SHINE.",
+        "description": "Make every celebration unforgettable with designer lehengas that blend timeless tradition with exquisite craftsmanship. From intricate embroidery to breathtaking designs, find the perfect outfit that makes every occasion truly yours.",
+        "text_alignment": "center",
+        "detail_image": "shopify://shop_images/Rectangle_16.png",
+        "button_label": "OWN THE SPOTLIGHT",
+        "button_link": "",
+        "bg_color": "#58051a",
+        "bg_image": "shopify://shop_images/Luxurious_Burgundy_Damask_Texture_1.png",
+        "bg_image_opacity": 100,
+        "bg_image_style": "cover",
+        "heading_color": "#ffffff",
+        "text_color": "#f0e6e8",
+        "btn_bg": "#ffffff",
+        "btn_text": "#000000",
+        "btn_border_color": "#ffffff",
+        "btn_hover_bg": "rgba(0,0,0,0)",
+        "btn_hover_text": "#ffffff",
+        "show_texture_pattern": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "marquee_Vqawgz": {
+      "type": "marquee",
+      "blocks": {
+        "logo_EmxVNa": {
+          "type": "logo",
+          "name": "t:names.logo",
+          "settings": {
+            "inverse": false,
+            "font": "heading",
+            "text_color": "",
+            "unit": "pixel",
+            "percent_width": 100,
+            "pixel_height": 24,
+            "custom_mobile_size": false,
+            "unit_mobile": "percent",
+            "percent_width_mobile": 100,
+            "pixel_height_mobile": 120,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_bWXhdd": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We make things that work better and last longer.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "nowrap",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "logo_EmxVNa",
+        "text_bWXhdd"
+      ],
+      "name": "t:names.marquee_section",
+      "settings": {
+        "movement_direction": "normal",
+        "background_color": "",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "gap_between_elements": 24
+      }
+    },
+    "marqueenote_89aWyk": {
+      "type": "marqueenote",
+      "blocks": {
+        "text_BnHWJD": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "FashionTrends"
+          }
+        },
+        "text_JV48fr": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "Unique Style"
+          }
+        },
+        "text_pmWDbH": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "Timeless Fashion"
+          }
+        },
+        "text_D3EnLB": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "FashionTrends"
+          }
+        },
+        "text_GcxnUq": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "PremiumFashion"
+          }
+        },
+        "text_j9L8Cw": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "LuxuryStyle"
+          }
+        }
+      },
+      "block_order": [
+        "text_BnHWJD",
+        "text_JV48fr",
+        "text_pmWDbH",
+        "text_D3EnLB",
+        "text_GcxnUq",
+        "text_j9L8Cw"
+      ],
+      "name": "Marquee Note",
+      "settings": {
+        "bg": "{{ settings.color_palette.color3 }}",
+        "text_color": "#ffffff",
+        "direction": "left",
+        "speed": 40
+      }
+    }
+  },
+  "order": [
+    "slider_banner_NUGYpr",
+    "hero_jVaWmY",
+    "price_badges_Jwfxkk",
+    "arch_slider_diwali",
+    "product_list_fa6P9H",
+    "custom_image_cards_RcjwAR",
+    "shop_by_categories_7FCqJU",
+    "story_showcase_banner",
+    "marquee_Vqawgz",
+    "marqueenote_89aWyk"
+  ]
+}

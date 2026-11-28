@@ -1,0 +1,767 @@
+{% comment %}
+  Section: Arch Slider
+  Displays an elegant arched frame card slider with golden borders, customizable headings,
+  and smooth carousel navigation (Swiper).
+  Perfect for showcasing festive collections, best prices, featured looks, or categories.
+{% endcomment %}
+
+<div
+  id="ArchSlider-{{ section.id }}"
+  class="arch-slider-section"
+  style="
+    --arch-bg-color: {{ section.settings.background_color | default: '#ffffff' }};
+    --arch-pt: {{ section.settings.padding_top | default: 48 }}px;
+    --arch-pb: {{ section.settings.padding_bottom | default: 48 }}px;
+    --arch-heading-color: {{ section.settings.heading_color | default: '#1a1a1a' }};
+    --arch-subheading-color: {{ section.settings.subheading_color | default: '#666666' }};
+    --arch-border-color: {{ section.settings.border_color | default: '#d4a34b' }};
+    --arch-border-width: {{ section.settings.border_width | default: 2 }}px;
+    --arch-border-gap: {{ section.settings.border_gap | default: 10 }}px;
+    --arch-card-bg: {{ section.settings.card_bg_color | default: '#ffffff' }};
+    --arch-card-height: {{ section.settings.card_height_desktop | default: 430 }}px;
+    --arch-card-height-mobile: {{ section.settings.card_height_mobile | default: 270 }}px;
+    --arch-arrow-bg: {{ section.settings.arrow_bg_color | default: '#ffffff' }};
+    --arch-arrow-color: {{ section.settings.arrow_color | default: '#1a1a1a' }};
+    --arch-arrow-border: {{ section.settings.arrow_border_color | default: '#e2ddd8' }};
+    --arch-arrow-hover-bg: {{ section.settings.arrow_hover_bg | default: '#1a1a1a' }};
+    --arch-arrow-hover-color: {{ section.settings.arrow_hover_color | default: '#ffffff' }};
+    --arch-title-color: {{ section.settings.title_color | default: '#1a1a1a' }};
+  "
+>
+  <div class="arch-slider-container">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="arch-slider-header arch-slider-header--{{ section.settings.heading_alignment }}">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="arch-slider-heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="arch-slider-subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="arch-slider-wrapper">
+      <div class="swiper arch-slider-swiper" id="arch-swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide arch-slide" {{ block.shopify_attributes }}>
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="arch-card" aria-label="{{ block.settings.title | default: 'View collection' | escape }}">
+              {%- else -%}
+                <div class="arch-card">
+              {%- endif -%}
+
+                <div class="arch-card__frame">
+                  <div class="arch-card__inner">
+                    {%- if block.settings.image != blank -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 800
+                        | image_tag:
+                          loading: 'lazy',
+                          class: 'arch-card__image',
+                          alt: block.settings.title | default: block.settings.image.alt | default: 'Arch card',
+                          widths: '240, 360, 480, 640, 800',
+                          sizes: '(max-width: 767px) 75vw, (max-width: 1024px) 35vw, 25vw'
+                      }}
+                    {%- else -%}
+                      <div class="arch-card__placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                {%- if block.settings.title != blank -%}
+                  <h3 class="arch-card__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="arch-card__subtitle">{{ block.settings.subtitle }}</p>
+                {%- endif -%}
+
+              {%- if block.settings.link != blank -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.settings.show_arrows and section.blocks.size > 1 -%}
+        <button
+          type="button"
+          class="arch-slider-nav arch-slider-nav--prev"
+          id="arch-prev-{{ section.id }}"
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="arch-slider-nav arch-slider-nav--next"
+          id="arch-next-{{ section.id }}"
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .arch-slider-section {
+    padding-top: var(--arch-pt, 48px);
+    padding-bottom: var(--arch-pb, 48px);
+    background-color: var(--arch-bg-color, #ffffff);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .arch-slider-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .arch-slider-header {
+    margin-bottom: 34px;
+  }
+
+  .arch-slider-header--center {
+    text-align: center;
+  }
+
+  .arch-slider-header--left {
+    text-align: left;
+  }
+
+  .arch-slider-header--right {
+    text-align: right;
+  }
+
+  .arch-slider-heading {
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--arch-heading-color, #1a1a1a);
+    line-height: 1.3;
+  }
+
+  .arch-slider-subheading {
+    font-size: clamp(14px, 1.4vw, 16px);
+    color: var(--arch-subheading-color, #666666);
+    margin: 8px 0 0;
+    line-height: 1.6;
+  }
+
+  .arch-slider-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0 48px;
+    box-sizing: border-box;
+  }
+
+  .arch-slider-swiper {
+    width: 100%;
+    overflow: hidden !important;
+    padding: 10px 4px 18px;
+    box-sizing: border-box;
+  }
+
+  .arch-slide {
+    height: auto;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .arch-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .arch-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Outer Arch Frame with Golden Border */
+  .arch-card__frame {
+    position: relative;
+    width: 100%;
+    border-radius: 9999px 9999px 0 0;
+    border: var(--arch-border-width, 2px) solid var(--arch-border-color, #d4a34b);
+    padding: var(--arch-border-gap, 10px);
+    background-color: var(--arch-card-bg, #ffffff);
+    box-sizing: border-box;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .arch-card:hover .arch-card__frame {
+    box-shadow: 0 10px 24px rgba(212, 163, 75, 0.2);
+  }
+
+  /* Inner Image Container matching the Arch Shape */
+  .arch-card__inner {
+    position: relative;
+    width: 100%;
+    height: var(--arch-card-height, 430px);
+    border-radius: 9999px 9999px 0 0;
+    overflow: hidden;
+    background: #f8f6f2;
+    display: block;
+  }
+
+  .arch-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .arch-card:hover .arch-card__image {
+    transform: scale(1.05);
+  }
+
+  .arch-card__placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f7f4ec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--arch-border-color, #d4a34b);
+  }
+
+  .arch-card__title {
+    margin: 14px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--arch-title-color, #1a1a1a);
+    transition: color 0.25s ease;
+  }
+
+  .arch-card:hover .arch-card__title {
+    color: var(--arch-border-color, #d4a34b);
+  }
+
+  .arch-card__subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--arch-subheading-color, #666666);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* Navigation Arrows */
+  .arch-slider-nav {
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--arch-arrow-bg, #ffffff);
+    color: var(--arch-arrow-color, #1a1a1a);
+    border: 1px solid var(--arch-arrow-border, #e2ddd8);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.25s ease;
+    padding: 0;
+  }
+
+  .arch-slider-nav svg {
+    display: block;
+  }
+
+  .arch-slider-nav--prev {
+    left: 0;
+  }
+
+  .arch-slider-nav--next {
+    right: 0;
+  }
+
+  .arch-slider-nav:hover {
+    background: var(--arch-arrow-hover-bg, #1a1a1a);
+    color: var(--arch-arrow-hover-color, #ffffff);
+    border-color: var(--arch-arrow-hover-bg, #1a1a1a);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  }
+
+  .arch-slider-nav.swiper-button-disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    .arch-slider-wrapper {
+      padding: 0 36px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .arch-slider-section {
+      padding-top: calc(var(--arch-pt, 48px) * 0.7);
+      padding-bottom: calc(var(--arch-pb, 48px) * 0.7);
+    }
+
+    .arch-slider-container {
+      padding: 0 16px;
+    }
+
+    .arch-slider-header {
+      margin-bottom: 24px;
+    }
+
+    .arch-slider-wrapper {
+      padding: 0;
+    }
+
+    .arch-card__inner {
+      height: var(--arch-card-height-mobile, 270px);
+    }
+
+    .arch-slider-nav {
+      display: none;
+    }
+
+    .arch-card:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function initArchSlider() {
+      var sectionId = '{{ section.id }}';
+      var swiperEl = document.getElementById('arch-swiper-' + sectionId);
+      if (!swiperEl) return;
+
+      if (typeof Swiper === 'undefined') {
+        setTimeout(initArchSlider, 100);
+        return;
+      }
+
+      if (swiperEl.swiper) {
+        swiperEl.swiper.destroy(true, true);
+      }
+
+      var autoplaySetting = {{ section.settings.autoplay | default: false }};
+      var autoplayConfig = false;
+      if (autoplaySetting) {
+        autoplayConfig = {
+          delay: {{ section.settings.autoplay_speed | default: 4 | times: 1000 }},
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        };
+      }
+
+      var desktopCols = {{ section.settings.columns_desktop | default: 4 }};
+      var tabletCols = {{ section.settings.columns_tablet | default: 3 }};
+      var mobileCols = parseFloat('{{ section.settings.columns_mobile | default: "1.25" }}') || 1.25;
+      var cardGap = {{ section.settings.card_gap | default: 22 }};
+
+      new Swiper(swiperEl, {
+        slidesPerView: mobileCols,
+        spaceBetween: 14,
+        grabCursor: true,
+        watchOverflow: true,
+        loop: {{ section.settings.enable_loop | default: false }},
+        autoplay: autoplayConfig,
+        navigation: {
+          prevEl: '#arch-prev-' + sectionId,
+          nextEl: '#arch-next-' + sectionId
+        },
+        breakpoints: {
+          480: {
+            slidesPerView: Math.min(mobileCols + 0.3, 2),
+            spaceBetween: 16
+          },
+          640: {
+            slidesPerView: 2.2,
+            spaceBetween: 18
+          },
+          768: {
+            slidesPerView: tabletCols,
+            spaceBetween: cardGap
+          },
+          1024: {
+            slidesPerView: desktopCols,
+            spaceBetween: cardGap
+          }
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initArchSlider);
+    } else {
+      initArchSlider();
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.detail && e.detail.sectionId === '{{ section.id }}') {
+        initArchSlider();
+      }
+    });
+
+    document.addEventListener('shopify:section:select', function (e) {
+      if (e.detail && e.detail.sectionId === '{{ section.id }}') {
+        initArchSlider();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Arch Slider",
+  "tag": "section",
+  "class": "arch-slider-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "DIWALI'S BEST PRICES"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Arch Frame Styling"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Arch Border Color (Gold)",
+      "default": "#d4a34b"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border Thickness",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "border_gap",
+      "label": "Padding Inside Border",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_height_desktop",
+      "label": "Card Image Height (Desktop)",
+      "min": 250,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 430
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card Image Height (Mobile)",
+      "min": 180,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 270
+    },
+    {
+      "type": "header",
+      "content": "Colors & Typography"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on Desktop",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Columns on Tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile",
+      "options": [
+        {
+          "value": "1.15",
+          "label": "1.15 Slides"
+        },
+        {
+          "value": "1.25",
+          "label": "1.25 Slides (Recommended)"
+        },
+        {
+          "value": "1.5",
+          "label": "1.5 Slides"
+        },
+        {
+          "value": "2",
+          "label": "2 Slides"
+        }
+      ],
+      "default": "1.25"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Slides",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "Enable Infinite Loop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed (seconds)",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Navigation Arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg_color",
+      "label": "Arrow Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Icon Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_border_color",
+      "label": "Arrow Border Color",
+      "default": "#e2ddd8"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg",
+      "label": "Arrow Hover Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_color",
+      "label": "Arrow Hover Icon Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "arch_slide",
+      "name": "Arch Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Slide Link (Product / Collection)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Arch Slider",
+      "settings": {
+        "heading": "DIWALI'S BEST PRICES"
+      },
+      "blocks": [
+        {
+          "type": "arch_slide"
+        },
+        {
+          "type": "arch_slide"
+        },
+        {
+          "type": "arch_slide"
+        },
+        {
+          "type": "arch_slide"
+        },
+        {
+          "type": "arch_slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

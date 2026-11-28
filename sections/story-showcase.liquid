@@ -1,0 +1,698 @@
+{% comment %}
+  Section: Story Showcase Banner
+  Displays a high-end luxury split banner featuring a full-bleed lifestyle image on one side
+  and a rich brand storytelling panel on the other with headline, narrative copy, craftsmanship
+  close-up detail image, and call-to-action button.
+{% endcomment %}
+
+<div
+  id="StoryShowcase-{{ section.id }}"
+  class="story-showcase-section {% if section.settings.section_width == 'page-width' %}story-showcase--contained{% else %}story-showcase--full{% endif %}"
+  style="
+    --ss-bg: {{ section.settings.bg_color | default: '#58051a' }};
+    --ss-heading-color: {{ section.settings.heading_color | default: '#ffffff' }};
+    --ss-text-color: {{ section.settings.text_color | default: '#f0e6e8' }};
+    --ss-btn-bg: {{ section.settings.btn_bg | default: '#ffffff' }};
+    --ss-btn-text: {{ section.settings.btn_text | default: '#000000' }};
+    --ss-btn-hover-bg: {{ section.settings.btn_hover_bg | default: 'transparent' }};
+    --ss-btn-hover-text: {{ section.settings.btn_hover_text | default: '#ffffff' }};
+    --ss-btn-border: {{ section.settings.btn_border_color | default: '#ffffff' }};
+    --ss-min-height: {{ section.settings.desktop_height | default: 680 }}px;
+    --ss-pt: {{ section.settings.padding_top | default: 0 }}px;
+    --ss-pb: {{ section.settings.padding_bottom | default: 0 }}px;
+  "
+>
+  <div class="story-showcase__container">
+    <div class="story-showcase__grid {% if section.settings.image_position == 'right' %}story-showcase__grid--reverse{% endif %}">
+      
+      <!-- Primary Lifestyle Media -->
+      <div class="story-showcase__media-col">
+        {%- if section.settings.main_image != blank -%}
+          {{
+            section.settings.main_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              class: 'story-showcase__main-image',
+              alt: section.settings.heading | default: 'Eloha celebration lehenga',
+              widths: '400, 600, 800, 1000, 1200, 1600',
+              sizes: '(max-width: 767px) 100vw, 50vw'
+          }}
+        {%- else -%}
+          <div class="story-showcase__media-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span>Upload Main Lifestyle Image</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Narrative & Craftsmanship Content Panel -->
+      <div class="story-showcase__content-col">
+        <!-- Story Panel Background Image -->
+        {%- if section.settings.bg_image != blank -%}
+          <div
+            class="story-showcase__bg-image story-showcase__bg-image--{{ section.settings.bg_image_style | default: 'cover' }}"
+            style="
+              background-image: url('{{ section.settings.bg_image | image_url: width: 1600 }}');
+              opacity: {{ section.settings.bg_image_opacity | default: 100 | divided_by: 100.0 }};
+            "
+          ></div>
+        {%- endif -%}
+
+        <!-- Optional Background Texture Overlay -->
+        {%- if section.settings.show_texture_pattern and section.settings.bg_image == blank -%}
+          <div class="story-showcase__texture-overlay"></div>
+        {%- endif -%}
+
+        <div class="story-showcase__content-inner story-showcase__content-inner--{{ section.settings.text_alignment }}">
+          
+          {%- if section.settings.heading != blank -%}
+            <h2 class="story-showcase__heading">
+              {{ section.settings.heading | newline_to_br }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.description != blank -%}
+            <div class="story-showcase__description">
+              <p>{{ section.settings.description }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.detail_image != blank -%}
+            <div class="story-showcase__detail-media">
+              {{
+                section.settings.detail_image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'story-showcase__detail-image',
+                  alt: 'Embroidery craftsmanship detail',
+                  widths: '280, 360, 480, 600, 800',
+                  sizes: '(max-width: 767px) 80vw, 340px'
+              }}
+            </div>
+          {%- else -%}
+            <div class="story-showcase__detail-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <span>Detail / Close-up Image</span>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <div class="story-showcase__action">
+              <a
+                href="{{ section.settings.button_link | default: '#' }}"
+                class="story-showcase__button"
+              >
+                {{ section.settings.button_label }}
+              </a>
+            </div>
+          {%- endif -%}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .story-showcase-section {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: var(--ss-pt, 0);
+    padding-bottom: var(--ss-pb, 0);
+  }
+
+  .story-showcase--contained .story-showcase__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .story-showcase--full .story-showcase__container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .story-showcase__grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: var(--ss-min-height, 680px);
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+  .story-showcase__grid--reverse {
+    flex-direction: row-reverse;
+  }
+
+  /* ── Left Column: Primary Lifestyle Media ── */
+  .story-showcase__media-col {
+    flex: 1 1 50%;
+    width: 50%;
+    min-height: var(--ss-min-height, 680px);
+    position: relative;
+    overflow: hidden;
+    background-color: #2b2b2b;
+  }
+
+  .story-showcase__main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .story-showcase__media-col:hover .story-showcase__main-image {
+    transform: scale(1.02);
+  }
+
+  .story-showcase__media-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    background: #2a2527;
+    color: #a89ba1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── Right Column: Content Panel ── */
+  .story-showcase__content-col {
+    flex: 1 1 50%;
+    width: 50%;
+    background-color: var(--ss-bg, #58051a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 56px 48px;
+  }
+
+  /* Story Panel Background Image Layer */
+  .story-showcase__bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .story-showcase__bg-image--cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .story-showcase__bg-image--repeat {
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: top left;
+  }
+
+  .story-showcase__bg-image--contain {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Subtle Jacquard / Damask Luxury Pattern Overlay */
+  .story-showcase__texture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.08;
+    pointer-events: none;
+    background-image: radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffffff 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+  }
+
+  .story-showcase__content-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 540px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .story-showcase__content-inner--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .story-showcase__content-inner--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .story-showcase__content-inner--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  /* ── Heading ── */
+  .story-showcase__heading {
+    font-size: clamp(22px, 2.6vw, 36px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--ss-heading-color, #ffffff);
+    margin: 0 0 18px;
+    font-family: inherit;
+  }
+
+  /* ── Narrative Description ── */
+  .story-showcase__description {
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.65;
+    color: var(--ss-text-color, #f0e6e8);
+    margin: 0 0 32px;
+    max-width: 480px;
+    font-weight: 400;
+  }
+
+  .story-showcase__description p {
+    margin: 0;
+  }
+
+  /* ── Craftsmanship Detail Image ── */
+  .story-showcase__detail-media {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    margin-bottom: 34px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .story-showcase__detail-media:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.45);
+  }
+
+  .story-showcase__detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .story-showcase__detail-media:hover .story-showcase__detail-image {
+    transform: scale(1.06);
+  }
+
+  .story-showcase__detail-placeholder {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  /* ── Call To Action Button ── */
+  .story-showcase__action {
+    margin-top: 4px;
+  }
+
+  .story-showcase__button {
+    display: inline-block;
+    padding: 14px 34px;
+    background-color: var(--ss-btn-bg, #ffffff);
+    color: var(--ss-btn-text, #000000);
+    border: 1px solid var(--ss-btn-border, #ffffff);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0;
+  }
+
+  .story-showcase__button:hover {
+    background-color: var(--ss-btn-hover-bg, transparent);
+    color: var(--ss-btn-hover-text, #ffffff);
+    border-color: var(--ss-btn-hover-text, #ffffff);
+    transform: translateY(-2px);
+  }
+
+  /* ── Responsive Mobile Layout ── */
+  @media (max-width: 900px) {
+    .story-showcase__grid {
+      min-height: auto;
+    }
+
+    .story-showcase__media-col,
+    .story-showcase__content-col {
+      flex: 1 1 100%;
+      width: 100%;
+    }
+
+    .story-showcase__media-col {
+      min-height: 400px;
+      height: 60vh;
+    }
+
+    .story-showcase__content-col {
+      padding: 44px 24px;
+    }
+
+    .story-showcase__detail-media {
+      max-width: 270px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .story-showcase__media-col {
+      min-height: 340px;
+      height: 52vh;
+    }
+
+    .story-showcase__content-col {
+      padding: 36px 18px;
+    }
+
+    .story-showcase__heading {
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+
+    .story-showcase__description {
+      margin-bottom: 24px;
+    }
+
+    .story-showcase__detail-media {
+      max-width: 240px;
+      margin-bottom: 26px;
+    }
+
+    .story-showcase__button {
+      padding: 12px 28px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Story Showcase Banner",
+  "tag": "section",
+  "class": "story-showcase-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full Width (Edge-to-Edge)"
+        },
+        {
+          "value": "page-width",
+          "label": "Contained (Page Width)"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Lifestyle Image Position (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Minimum Height",
+      "min": 500,
+      "max": 850,
+      "step": 10,
+      "unit": "px",
+      "default": 680
+    },
+    {
+      "type": "header",
+      "content": "Lifestyle Image (Primary)"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Lifestyle Image"
+    },
+    {
+      "type": "header",
+      "content": "Story Narrative"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "EVERY DETAIL\nTELLS A STORY. EVERY\nLEHENGA MAKES YOU SHINE."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Paragraph",
+      "default": "Make every celebration unforgettable with designer lehengas that blend timeless tradition with exquisite craftsmanship. From intricate embroidery to breathtaking designs, find the perfect outfit that makes every occasion truly yours."
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Content Alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Craftsmanship Detail Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "detail_image",
+      "label": "Close-up / Detail Image"
+    },
+    {
+      "type": "header",
+      "content": "Call To Action Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "OWN THE SPOTLIGHT"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors & Styling"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Story Panel Background Color",
+      "default": "#58051a"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Story Panel Background Image"
+    },
+    {
+      "type": "range",
+      "id": "bg_image_opacity",
+      "label": "Background Image Opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "bg_image_style",
+      "label": "Background Image Style",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover (Fill entire panel)"
+        },
+        {
+          "value": "repeat",
+          "label": "Repeat Pattern (Tile)"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description Text Color",
+      "default": "#f0e6e8"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_text",
+      "label": "Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_bg",
+      "label": "Button Hover Background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover_text",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_texture_pattern",
+      "label": "Show Luxury Subtle Watermark Pattern",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story Showcase Banner",
+      "settings": {
+        "heading": "EVERY DETAIL\nTELLS A STORY. EVERY\nLEHENGA MAKES YOU SHINE.",
+        "description": "Make every celebration unforgettable with designer lehengas that blend timeless tradition with exquisite craftsmanship. From intricate embroidery to breathtaking designs, find the perfect outfit that makes every occasion truly yours.",
+        "button_label": "OWN THE SPOTLIGHT",
+        "bg_color": "#58051a",
+        "section_width": "full"
+      }
+    }
+  ]
+}
+{% endschema %}

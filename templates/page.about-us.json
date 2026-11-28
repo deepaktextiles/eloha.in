@@ -1,0 +1,100 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "about_us": {
+      "type": "about-us",
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
+            "image_position": "left",
+            "badge": "✦ THE GENESIS",
+            "heading": "A Tribute to Heritage, A Celebration of You",
+            "text": "<p>ELOHA was born out of a desire to create clothing that does more than drape gracefully—it inspires. Rooted in traditional craftsmanship and celebrating India's rich handloom artistry, each design balances royal grandeur with breathable modern ease.</p><p>From festive anarkalis to everyday luxury kurta sets and handcrafted sarees, every stitch is a testament to the master artisans who bring our vision to life.</p>",
+            "quote": "We believe clothing should feel like armor—graceful, formidable, and uniquely yours.",
+            "quote_author": "Founders, Subham khetan / Shivani khetan",
+            "button_label": "Explore Our Collections",
+            "button_link": "/collections/all"
+          }
+        },
+        "pillars_head": {
+          "type": "pillars_header",
+          "settings": {
+            "badge": "✦ OUR CORE VALUES",
+            "heading": "The ELOHA Philosophy",
+            "subheading": "Guided by integrity, cultural pride, and devotion to quality in every stitch."
+          }
+        },
+        "pillars_cards": {
+          "type": "pillars_grid",
+          "settings": {
+            "title_1": "Rooted in Heritage",
+            "desc_1": "Honoring age-old Indian handloom, artisan weaves, and timeless craftsmanship.",
+            "title_2": "Uncompromising Quality",
+            "desc_2": "Handpicked pure fabrics, detailed stitching, and opulent silhouettes crafted to endure.",
+            "title_3": "Clothing for a Stronger You",
+            "desc_3": "Tailored for the modern woman who embraces both her cultural roots and unstoppable spirit.",
+            "title_4": "Conscious Luxury",
+            "desc_4": "Fair artisan partnerships and mindful production that respects nature and communities."
+          }
+        },
+        "stats": {
+          "type": "stats_bar",
+          "settings": {
+            "stat_num_1": "50,000+",
+            "stat_label_1": "Women Empowered",
+            "stat_num_2": "100%",
+            "stat_label_2": "Pure Handpicked Fabrics",
+            "stat_num_3": "500+",
+            "stat_label_3": "Master Artisans Supported",
+            "stat_num_4": "28+",
+            "stat_label_4": "States Delivered Across India"
+          }
+        },
+        "cta": {
+          "type": "cta_card",
+          "settings": {
+            "badge": "✦ JOIN THE ELOHA FAMILY",
+            "heading": "Discover Your Signature Look",
+            "text": "Immerse yourself in our latest festive and contemporary arrivals designed for every memorable celebration.",
+            "button_label": "Shop Latest Arrivals",
+            "button_link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "story_1",
+        "pillars_head",
+        "pillars_cards",
+        "stats",
+        "cta"
+      ],
+      "settings": {
+        "badge": "✦ BORN TO CELEBRATE YOU",
+        "heading": "CLOTHING FOR A STRONGER YOU",
+        "subheading": "At ELOHA, we weave centuries of Indian artisanal heritage with modern silhouettes, designing opulent ethnic and contemporary wear crafted to empower your spirit.",
+        "hero_image": "shopify://shop_images/Gold_and_Burgundy_Modern_Elegant_Sarees_Sale_Billboard_Landscape.png",
+        "hero_image_tag": "✦ Handcrafted with Soul",
+        "background_color": "{{ settings.color_palette.background }}",
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "accent_color": "{{ settings.color_palette.color1 }}",
+        "card_bg": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "about_us"
+  ]
+}

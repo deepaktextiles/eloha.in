@@ -1,0 +1,612 @@
+{% comment %}
+  Section: Shop By Categories
+  Customizer-ready: Merchant can add category images, titles, links, heading, background color,
+  arrow styling, and customize how many cards are visible on desktop/tablet/mobile.
+{% endcomment %}
+
+<div
+  class="sbc-section"
+  id="ShopByCategories-{{ section.id }}"
+  style="
+    --sbc-bg: {{ section.settings.background_color }};
+    --sbc-pt: {{ section.settings.padding_top }}px;
+    --sbc-pb: {{ section.settings.padding_bottom }}px;
+    --sbc-title-color: {{ section.settings.title_color }};
+    --sbc-heading-color: {{ section.settings.heading_color }};
+    --sbc-card-height: {{ section.settings.card_height_desktop | default: 390 }}px;
+    --sbc-card-height-mobile: {{ section.settings.card_height_mobile | default: 200 }}px;
+    --sbc-arrow-bg: {{ section.settings.arrow_bg_color | default: '#ffffff' }};
+    --sbc-arrow-color: {{ section.settings.arrow_color | default: '#1a1a1a' }};
+    --sbc-arrow-border: {{ section.settings.arrow_border_color | default: '#e2ddd8' }};
+    --sbc-arrow-hover-bg: {{ section.settings.arrow_hover_bg | default: '#1a1a1a' }};
+    --sbc-arrow-hover-color: {{ section.settings.arrow_hover_color | default: '#ffffff' }};
+  "
+>
+  <div class="sbc-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sbc-heading" id="ShopByCategoriesHeading-{{ section.id }}">
+        <span class="sbc-heading__icon">✦</span>
+        <span>{{ section.settings.heading }}</span>
+      </h2>
+    {%- endif -%}
+
+    <div class="sbc-slider-wrapper">
+      <div class="swiper sbc-swiper" id="sbc-swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide sbc-slide" {{ block.shopify_attributes }}>
+              <a class="sbc-card__link" href="{{ block.settings.link | default: '#' }}">
+                <div class="sbc-card__arch">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 600 | image_tag:
+                      loading: 'lazy',
+                      class: 'sbc-card__image',
+                      alt: block.settings.title | default: block.settings.image.alt,
+                      widths: '200, 300, 400, 600',
+                      sizes: '(max-width: 767px) 50vw, (max-width: 1024px) 33vw, 20vw'
+                    }}
+                  {%- else -%}
+                    <div class="sbc-card__placeholder">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    </div>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.title != blank -%}
+                  <p class="sbc-card__title">{{ block.settings.title }}</p>
+                {%- endif -%}
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.settings.show_arrows != false and section.blocks.size > 1 -%}
+        <!-- Swiper Navigation Arrows -->
+        <button class="sbc-nav sbc-nav--prev" id="sbc-prev-{{ section.id }}" aria-label="Previous categories">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="sbc-nav sbc-nav--next" id="sbc-next-{{ section.id }}" aria-label="Next categories">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Section wrapper ── */
+  .sbc-section {
+    padding-top: var(--sbc-pt, 40px);
+    padding-bottom: var(--sbc-pb, 40px);
+    background-color: var(--sbc-bg, #faf6ee);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .sbc-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* ── Heading ── */
+  .sbc-heading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 32px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sbc-heading-color, #1a1a1a);
+  }
+
+  .sbc-heading__icon {
+    font-size: 20px;
+  }
+
+  /* ── Slider wrapper ── */
+  .sbc-slider-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0 54px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .sbc-swiper {
+    width: 100%;
+    overflow: hidden !important;
+    position: relative;
+  }
+
+  /* ── Slide ── */
+  .sbc-swiper .sbc-slide {
+    height: auto;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  /* ── Card link ── */
+  .sbc-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+  }
+
+  /* ── Arch shape ── */
+  .sbc-card__arch {
+    position: relative;
+    width: 100%;
+    height: var(--sbc-card-height, 388px);
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 999px 999px 0 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .sbc-card__link:hover .sbc-card__arch {
+    transform: translateY(-4px);
+  }
+
+  .sbc-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .sbc-card__placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f0ebe0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Title ── */
+  .sbc-card__title {
+    margin: 12px 0 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sbc-title-color, #1a1a1a);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* ── Navigation arrows ── */
+  .sbc-nav {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--sbc-arrow-bg, #ffffff);
+    color: var(--sbc-arrow-color, #1a1a1a);
+    border: 1px solid var(--sbc-arrow-border, #e2ddd8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    padding: 0;
+  }
+
+  .sbc-nav svg {
+    display: block;
+  }
+
+  .sbc-nav:hover {
+    background: var(--sbc-arrow-hover-bg, #1a1a1a);
+    color: var(--sbc-arrow-hover-color, #ffffff);
+    border-color: var(--sbc-arrow-hover-bg, #1a1a1a);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.18);
+  }
+
+  .sbc-nav.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .sbc-nav--prev {
+    left: 4px;
+  }
+
+  .sbc-nav--next {
+    right: 4px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .sbc-slider-wrapper {
+      padding: 0 48px;
+    }
+
+    .sbc-nav {
+      width: 38px;
+      height: 38px;
+    }
+
+    .sbc-nav--prev {
+      left: 4px;
+    }
+
+    .sbc-nav--next {
+      right: 4px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .sbc-section {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+
+    .sbc-heading {
+      font-size: 16px;
+      margin-bottom: 20px;
+      letter-spacing: 1.5px;
+    }
+
+    .sbc-slider-wrapper {
+      padding: 0 42px;
+    }
+
+    .sbc-card__arch {
+      height: var(--sbc-card-height-mobile, 200px);
+    }
+
+    .sbc-card__title {
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .sbc-nav {
+      width: 34px;
+      height: 34px;
+    }
+
+    .sbc-nav--prev {
+      left: 2px;
+    }
+
+    .sbc-nav--next {
+      right: 2px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var sectionId = '{{ section.id }}';
+
+    function initSbcSwiper() {
+      var swiperEl = document.getElementById('sbc-swiper-' + sectionId);
+      if (!swiperEl || typeof Swiper === 'undefined') return;
+
+      if (swiperEl.swiper) {
+        swiperEl.swiper.destroy(true, true);
+      }
+
+      var desktopCols = {{ section.settings.columns_desktop | default: 6 }};
+      var tabletCols = {{ section.settings.columns_tablet | default: 4 }};
+      var mobileCols = parseFloat('{{ section.settings.columns_mobile | default: "2.3" }}') || 2.3;
+      var gap = {{ section.settings.card_gap | default: 20 }};
+
+      var autoplayConfig = false;
+      {% if section.settings.autoplay %}
+        autoplayConfig = {
+          delay: {{ section.settings.autoplay_speed | default: 3 | times: 1000 }},
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        };
+      {% endif %}
+
+      new Swiper(swiperEl, {
+        slidesPerView: mobileCols,
+        spaceBetween: Math.max(8, Math.round(gap * 0.6)),
+        grabCursor: true,
+        centeredSlides: false,
+        watchOverflow: true,
+        loop: {{ section.settings.enable_loop | default: false }},
+        autoplay: autoplayConfig,
+        navigation: {
+          prevEl: '#sbc-prev-' + sectionId,
+          nextEl: '#sbc-next-' + sectionId
+        },
+        breakpoints: {
+          600: {
+            slidesPerView: Math.min(mobileCols + 0.5, tabletCols),
+            spaceBetween: Math.round(gap * 0.75)
+          },
+          768: {
+            slidesPerView: tabletCols,
+            spaceBetween: gap
+          },
+          1024: {
+            slidesPerView: desktopCols,
+            spaceBetween: gap
+          }
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSbcSwiper);
+    } else {
+      initSbcSwiper();
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.detail && e.detail.sectionId === sectionId) {
+        initSbcSwiper();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Shop By Categories",
+  "tag": "section",
+  "class": "section-shop-by-categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SHOP BY CATEGORIES"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAF6EE"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Category Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Carousel Display Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Cards visible on Desktop",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Cards visible on Tablet",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Cards visible on Mobile",
+      "options": [
+        { "value": "1.2", "label": "1 Card (with peek)" },
+        { "value": "2", "label": "2 Cards" },
+        { "value": "2.3", "label": "2 Cards (with peek)" },
+        { "value": "3", "label": "3 Cards" },
+        { "value": "3.3", "label": "3 Cards (with peek)" },
+        { "value": "4", "label": "4 Cards" }
+      ],
+      "default": "2.3"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Space between cards",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_height_desktop",
+      "label": "Card Arch Height (Desktop)",
+      "min": 220,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 390
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card Arch Height (Mobile)",
+      "min": 140,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "Loop Carousel (Infinite)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed (seconds)",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Navigation Arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg_color",
+      "label": "Arrow Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Icon Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_border_color",
+      "label": "Arrow Border Color",
+      "default": "#e2ddd8"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg",
+      "label": "Arrow Hover Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_color",
+      "label": "Arrow Hover Icon Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Categories",
+      "blocks": [
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "SUITS"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "KURTAS"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "SAREES"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "DRESSES"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "JEWELLERY"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "LOUNGEWEAR"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,119 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {
+            "text_color": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "zigzag_image_content_REpiJB": {
+      "type": "zigzag-image-content",
+      "blocks": {
+        "story_row_gq4LLd": {
+          "type": "story_row",
+          "settings": {
+            "image_position": "auto",
+            "eyebrow": "",
+            "heading": "Light On The Pocket",
+            "text": "<p>We bring you the latest styles while staying pocket-friendly, so thoughtful fashion stays within everyone's reach.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "story_row_8qb8Dk": {
+          "type": "story_row",
+          "settings": {
+            "image_position": "auto",
+            "eyebrow": "",
+            "heading": "Something For Everyone",
+            "text": "<p>Whether it is a celebration, festive gathering, or an effortless everyday look, you will find something made for you.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "story_row_gq4LLd",
+        "story_row_8qb8Dk"
+      ],
+      "name": "Zigzag image content",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Who Are We?",
+        "text": "<p>ELOHA is a fashion brand crafted to celebrate effortless elegance, rich artisanal heritage, and modern comfort for every occasion.</p>",
+        "header_alignment": "center",
+        "first_row_image_position": "left",
+        "image_ratio": "landscape",
+        "image_corner_radius": 12,
+        "content_alignment": "left",
+        "vertical_alignment": "center",
+        "row_gap": 56,
+        "column_gap": 48,
+        "section_width": "page-width",
+        "background_color": "",
+        "text_color": "",
+        "padding-block-start": 48,
+        "padding-block-end": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "zigzag_image_content_REpiJB"
+  ]
+}

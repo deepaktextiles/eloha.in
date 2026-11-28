@@ -1,0 +1,1081 @@
+{% comment %}
+  Section: About Us
+  Customizer-ready: Complete brand storytelling section for About Us page with Hero, Brand Story,
+  Pillars/Values, Stats, and Call-to-action.
+{% endcomment %}
+
+<div
+  class="about-us-section"
+  id="AboutUs-{{ section.id }}"
+  style="
+    --about-bg: {{ section.settings.background_color | default: '#faf6ee' }};
+    --about-heading: {{ section.settings.heading_color | default: '#1a1a1a' }};
+    --about-text: {{ section.settings.text_color | default: '#4a4a4a' }};
+    --about-accent: {{ section.settings.accent_color | default: '#8c2437' }};
+    --about-card-bg: {{ section.settings.card_bg | default: '#ffffff' }};
+    --about-pt: {{ section.settings.padding_top | default: 50 }}px;
+    --about-pb: {{ section.settings.padding_bottom | default: 60 }}px;
+  "
+>
+  <div class="about-us-container">
+    {%- if section.settings.badge != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="about-hero-header">
+        {%- if section.settings.badge != blank -%}
+          <span class="about-badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h1 class="about-main-heading">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="about-subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.hero_image != blank -%}
+      <div class="about-hero-media">
+        {{ section.settings.hero_image | image_url: width: 1600 | image_tag:
+          loading: 'eager',
+          class: 'about-hero-img',
+          alt: section.settings.heading | default: 'About ELOHA',
+          widths: '600, 900, 1200, 1600',
+          sizes: '(max-width: 767px) 100vw, 1280px'
+        }}
+        {%- if section.settings.hero_image_tag != blank -%}
+          <span class="about-floating-tag">{{ section.settings.hero_image_tag }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'story' -%}
+          <div class="about-story-row {% if block.settings.image_position == 'right' %}about-story-row--reverse{% endif %}" {{ block.shopify_attributes }}>
+            <div class="about-story-media">
+              <div class="about-arch-wrapper">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag:
+                    loading: 'lazy',
+                    class: 'about-story-img',
+                    alt: block.settings.heading | default: 'ELOHA Story',
+                    widths: '400, 600, 800',
+                    sizes: '(max-width: 767px) 100vw, 550px'
+                  }}
+                {%- else -%}
+                  <div class="about-img-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="about-story-content">
+              {%- if block.settings.badge != blank -%}
+                <span class="about-story-badge">{{ block.settings.badge }}</span>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="about-story-title">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="about-story-text">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- if block.settings.quote != blank -%}
+                <blockquote class="about-quote">
+                  <span class="about-quote-mark">“</span>
+                  <p>{{ block.settings.quote }}</p>
+                  {%- if block.settings.quote_author != blank -%}
+                    <cite>— {{ block.settings.quote_author }}</cite>
+                  {%- endif -%}
+                </blockquote>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="about-btn">
+                  {{ block.settings.button_label }}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+
+        {%- when 'pillars_header' -%}
+          <div class="about-section-header" {{ block.shopify_attributes }}>
+            {%- if block.settings.badge != blank -%}
+              <span class="about-badge">{{ block.settings.badge }}</span>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h2 class="about-section-title">{{ block.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if block.settings.subheading != blank -%}
+              <p class="about-section-subtitle">{{ block.settings.subheading }}</p>
+            {%- endif -%}
+          </div>
+
+        {%- when 'pillars_grid' -%}
+          <div class="about-pillars-grid" {{ block.shopify_attributes }}>
+            <div class="about-pillar-card">
+              <div class="about-pillar-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <h3 class="about-pillar-title">{{ block.settings.title_1 | default: 'Rooted in Heritage' }}</h3>
+              <p class="about-pillar-desc">{{ block.settings.desc_1 | default: 'Honoring age-old Indian handloom, artisan weaves, and timeless craftsmanship.' }}</p>
+            </div>
+
+            <div class="about-pillar-card">
+              <div class="about-pillar-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <h3 class="about-pillar-title">{{ block.settings.title_2 | default: 'Uncompromising Quality' }}</h3>
+              <p class="about-pillar-desc">{{ block.settings.desc_2 | default: 'Handpicked pure fabrics, detailed stitching, and opulent silhouettes crafted to endure.' }}</p>
+            </div>
+
+            <div class="about-pillar-card">
+              <div class="about-pillar-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </div>
+              <h3 class="about-pillar-title">{{ block.settings.title_3 | default: 'Clothing for a Stronger You' }}</h3>
+              <p class="about-pillar-desc">{{ block.settings.desc_3 | default: 'Tailored for the modern woman who embraces both her cultural roots and unstoppable spirit.' }}</p>
+            </div>
+
+            <div class="about-pillar-card">
+              <div class="about-pillar-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              </div>
+              <h3 class="about-pillar-title">{{ block.settings.title_4 | default: 'Conscious Luxury' }}</h3>
+              <p class="about-pillar-desc">{{ block.settings.desc_4 | default: 'Fair artisan partnerships and mindful production that respects nature and communities.' }}</p>
+            </div>
+          </div>
+
+        {%- when 'stats_bar' -%}
+          <div class="about-stats-bar" {{ block.shopify_attributes }}>
+            <div class="about-stat-item">
+              <span class="about-stat-number">{{ block.settings.stat_num_1 | default: '50K+' }}</span>
+              <span class="about-stat-label">{{ block.settings.stat_label_1 | default: 'Happy Women Empowered' }}</span>
+            </div>
+            <div class="about-stat-item">
+              <span class="about-stat-number">{{ block.settings.stat_num_2 | default: '100%' }}</span>
+              <span class="about-stat-label">{{ block.settings.stat_label_2 | default: 'Pure Handpicked Fabrics' }}</span>
+            </div>
+            <div class="about-stat-item">
+              <span class="about-stat-number">{{ block.settings.stat_num_3 | default: '500+' }}</span>
+              <span class="about-stat-label">{{ block.settings.stat_label_3 | default: 'Indian Artisans Supported' }}</span>
+            </div>
+            <div class="about-stat-item">
+              <span class="about-stat-number">{{ block.settings.stat_num_4 | default: '28' }}</span>
+              <span class="about-stat-label">{{ block.settings.stat_label_4 | default: 'States Delivered Across India' }}</span>
+            </div>
+          </div>
+
+        {%- when 'cta_card' -%}
+          <div class="about-cta-wrap" {{ block.shopify_attributes }}>
+            <div class="about-cta-card">
+              {%- if block.settings.badge != blank -%}
+                <span class="about-cta-badge">{{ block.settings.badge }}</span>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="about-cta-title">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="about-cta-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="about-cta-btn">
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+  /* ── Layout & Container ── */
+  .about-us-section {
+    background-color: var(--about-bg);
+    color: var(--about-text);
+    padding-top: var(--about-pt);
+    padding-bottom: var(--about-pb);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .about-us-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  /* ── Hero Header ── */
+  .about-hero-header {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto 40px;
+  }
+
+  .about-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--about-accent);
+    margin-bottom: 14px;
+    padding: 6px 14px;
+    background: rgba(140, 36, 55, 0.08);
+    border-radius: 20px;
+  }
+
+  .about-main-heading {
+    font-size: 40px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--about-heading);
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+
+  .about-subheading {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--about-text);
+    margin: 0 auto;
+    max-width: 680px;
+  }
+
+  /* ── Hero Media Banner ── */
+  .about-hero-media {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 60px;
+  
+  }
+
+  .about-hero-img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-floating-tag {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--about-heading);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+  }
+
+  /* ── Story Row (Split) ── */
+  .about-story-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 70px;
+  }
+
+  .about-story-row--reverse {
+    direction: rtl;
+  }
+
+  .about-story-row--reverse > * {
+    direction: ltr;
+  }
+
+  .about-arch-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    border-radius: 230px 230px 16px 16px;
+    overflow: hidden;
+    border: 3px solid rgba(201, 169, 110, 0.4);
+ 
+  }
+
+  .about-story-img {
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .about-arch-wrapper:hover .about-story-img {
+    transform: scale(1.04);
+  }
+
+  .about-img-placeholder {
+    width: 100%;
+    height: 500px;
+    background: #eedec8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a88960;
+  }
+
+  .about-story-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-story-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--about-accent);
+    margin-bottom: 12px;
+  }
+
+  .about-story-title {
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--about-heading);
+    margin: 0 0 20px;
+  }
+
+  .about-story-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--about-text);
+    margin-bottom: 24px;
+  }
+
+  .about-story-text p {
+    margin: 0 0 14px;
+  }
+
+  /* ── Quote Block ── */
+  .about-quote {
+    position: relative;
+    margin: 10px 0 28px;
+    padding: 20px 24px 20px 32px;
+    background: var(--about-card-bg);
+    border-left: 4px solid var(--about-accent);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .about-quote-mark {
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    font-size: 40px;
+    color: var(--about-accent);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .about-quote p {
+    margin: 0 0 8px;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--about-heading);
+  }
+
+  .about-quote cite {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--about-accent);
+  }
+
+  /* ── Button ── */
+  .about-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    padding: 14px 30px;
+    background: var(--about-heading);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  
+  }
+
+  .about-btn:hover {
+    background: var(--about-accent);
+    color: #ffffff;
+    transform: translateY(-2px);
+
+  }
+
+  /* ── Section Header ── */
+  .about-section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 40px;
+  }
+
+  .about-section-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--about-heading);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .about-section-subtitle {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--about-text);
+    margin: 0;
+  }
+
+  /* ── Pillars Grid ── */
+  .about-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 70px;
+  }
+
+  .about-pillar-card {
+    background: var(--about-card-bg);
+    padding: 32px 24px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+   
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .about-pillar-card:hover {
+    transform: translateY(-5px);
+   
+    border-color: rgba(201, 169, 110, 0.5);
+  }
+
+  .about-pillar-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: rgba(140, 36, 55, 0.08);
+    color: var(--about-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-pillar-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--about-heading);
+    margin: 0 0 12px;
+    line-height: 1.3;
+  }
+
+  .about-pillar-desc {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--about-text);
+    margin: 0;
+  }
+
+  /* ── Stats Bar ── */
+  .about-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    background: var(--about-heading);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    margin-bottom: 70px;
+    text-align: center;
+   
+  }
+
+  .about-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0 10px;
+  }
+
+  .about-stat-item:last-child {
+    border-right: none;
+  }
+
+  .about-stat-number {
+    font-size: 38px;
+    font-weight: 800;
+    color: #f7d794;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .about-stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* ── CTA Banner ── */
+  .about-cta-wrap {
+    margin-top: 20px;
+  }
+
+  .about-cta-card {
+    background: linear-gradient(135deg, #2b1117 0%, #1a1a1a 100%);
+    color: #ffffff;
+    border-radius: 18px;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+   
+    border: 1px solid rgba(247, 215, 148, 0.3);
+  }
+
+  .about-cta-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(247, 215, 148, 0.08);
+    pointer-events: none;
+  }
+
+  .about-cta-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #f7d794;
+    margin-bottom: 14px;
+  }
+
+  .about-cta-title {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 16px;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  .about-cta-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 620px;
+    margin: 0 auto 30px;
+  }
+
+  .about-cta-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: #f7d794;
+    color: #1a1a1a;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+   
+  }
+
+  .about-cta-btn:hover {
+    background: #ffffff;
+    color: #8c2437;
+    transform: translateY(-3px);
+
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .about-main-heading {
+      font-size: 32px;
+    }
+    .about-story-row {
+      gap: 36px;
+    }
+    .about-story-title {
+      font-size: 26px;
+    }
+    .about-pillars-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .about-stat-number {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .about-hero-header {
+      margin-bottom: 28px;
+    }
+    .about-main-heading {
+      font-size: 24px;
+      letter-spacing: 0.5px;
+    }
+    .about-subheading {
+      font-size: 14px;
+    }
+    .about-hero-media {
+      margin-bottom: 40px;
+    }
+    .about-hero-img {
+      height: 260px;
+    }
+    .about-floating-tag {
+      bottom: 14px;
+      left: 14px;
+      font-size: 10px;
+      padding: 7px 14px;
+    }
+    .about-story-row {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    .about-arch-wrapper {
+      max-width: 300px;
+      border-radius: 150px 150px 14px 14px;
+    }
+    .about-story-img {
+      height: 380px;
+    }
+    .about-story-title {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .about-story-text {
+      font-size: 14px;
+    }
+    .about-pillars-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 50px;
+    }
+    .about-pillar-card {
+      padding: 24px 18px;
+    }
+    .about-stats-bar {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 12px;
+      padding: 28px 16px;
+      margin-bottom: 50px;
+    }
+    .about-stat-item {
+      border-right: none;
+    }
+    .about-stat-number {
+      font-size: 26px;
+    }
+    .about-stat-label {
+      font-size: 10px;
+    }
+    .about-cta-card {
+      padding: 36px 20px;
+    }
+    .about-cta-title {
+      font-size: 22px;
+    }
+    .about-cta-text {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .about-cta-btn {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Us Story",
+  "tag": "section",
+  "class": "section-about-us",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Header"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Eyebrow Badge",
+      "default": "✦ BORN TO CELEBRATE YOU"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "CLOTHING FOR A STRONGER YOU"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "At ELOHA, we weave centuries of Indian artisanal heritage with modern silhouettes, designing opulent ethnic and contemporary wear crafted to empower your spirit."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_tag",
+      "label": "Hero Floating Badge",
+      "default": "✦ Handcrafted by Master Artisans"
+    },
+    {
+      "type": "header",
+      "content": "Color Customization"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#Ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / Maroon Color",
+      "default": "#8C2437"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Cards Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story Row (Split)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Story Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image Position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "✦ THE GENESIS"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "A Tribute to Heritage, A Celebration of You"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>ELOHA was born out of a desire to create clothing that does more than drape gracefully—it inspires. Rooted in Darbhanga and celebrating India's rich handloom traditions, each design balances royal grandeur with breathable ease.</p><p>From festive anarkalis to everyday luxury kurta sets and handcrafted sarees, every weave is a testament to the master artisans who bring our vision to life.</p>"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote / Founder Note",
+          "default": "We believe clothing should feel like armor—graceful, formidable, and uniquely yours."
+        },
+        {
+          "type": "text",
+          "id": "quote_author",
+          "label": "Quote Author",
+          "default": "Founders, Eloha"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Explore Collections"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    },
+    {
+      "type": "pillars_header",
+      "name": "Pillars Header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "✦ OUR CORE VALUES"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "The ELOHA Philosophy"
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Guided by integrity, cultural pride, and devotion to quality in every stitch."
+        }
+      ]
+    },
+    {
+      "type": "pillars_grid",
+      "name": "4 Core Pillars Grid",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Pillar 1 Title",
+          "default": "Rooted in Heritage"
+        },
+        {
+          "type": "textarea",
+          "id": "desc_1",
+          "label": "Pillar 1 Description",
+          "default": "Honoring age-old Indian handloom, artisan weaves, and timeless craftsmanship."
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Pillar 2 Title",
+          "default": "Uncompromising Quality"
+        },
+        {
+          "type": "textarea",
+          "id": "desc_2",
+          "label": "Pillar 2 Description",
+          "default": "Handpicked pure fabrics, detailed stitching, and opulent silhouettes crafted to endure."
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Pillar 3 Title",
+          "default": "Empowering Silhouettes"
+        },
+        {
+          "type": "textarea",
+          "id": "desc_3",
+          "label": "Pillar 3 Description",
+          "default": "Tailored for the modern woman who embraces both her cultural roots and unstoppable spirit."
+        },
+        {
+          "type": "text",
+          "id": "title_4",
+          "label": "Pillar 4 Title",
+          "default": "Conscious Luxury"
+        },
+        {
+          "type": "textarea",
+          "id": "desc_4",
+          "label": "Pillar 4 Description",
+          "default": "Fair artisan partnerships and mindful production that respects nature and communities."
+        }
+      ]
+    },
+    {
+      "type": "stats_bar",
+      "name": "Milestone Stats Bar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_num_1",
+          "label": "Stat 1 Number",
+          "default": "50,000+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label_1",
+          "label": "Stat 1 Label",
+          "default": "Women Empowered"
+        },
+        {
+          "type": "text",
+          "id": "stat_num_2",
+          "label": "Stat 2 Number",
+          "default": "100%"
+        },
+        {
+          "type": "text",
+          "id": "stat_label_2",
+          "label": "Stat 2 Label",
+          "default": "Pure Handpicked Fabrics"
+        },
+        {
+          "type": "text",
+          "id": "stat_num_3",
+          "label": "Stat 3 Number",
+          "default": "500+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label_3",
+          "label": "Stat 3 Label",
+          "default": "Master Artisans Supported"
+        },
+        {
+          "type": "text",
+          "id": "stat_num_4",
+          "label": "Stat 4 Number",
+          "default": "28+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label_4",
+          "label": "Stat 4 Label",
+          "default": "States Delivered Across India"
+        }
+      ]
+    },
+    {
+      "type": "cta_card",
+      "name": "Closing Call to Action",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "✦ JOIN THE ELOHA FAMILY"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Discover Your Signature Look"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Immerse yourself in our latest festive and contemporary arrivals designed for every memorable celebration."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Latest Arrivals"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us Story",
+      "blocks": [
+        {
+          "type": "story"
+        },
+        {
+          "type": "pillars_header"
+        },
+        {
+          "type": "pillars_grid"
+        },
+        {
+          "type": "stats_bar"
+        },
+        {
+          "type": "cta_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

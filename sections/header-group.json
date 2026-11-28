@@ -1,0 +1,196 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "t:names.header",
+  "sections": {
+    "marqueenote_gU4Lir": {
+      "type": "marqueenote",
+      "blocks": {
+        "text_afydFM": {
+          "type": "text",
+          "settings": {
+            "icon": "|",
+            "text": "“Enhance your cup with a drizzle of raw honey or a squeeze of fresh lemon — both deepen the hibiscus bloom and add a gentle warmth that lingers long after the last sip.”"
+          }
+        }
+      },
+      "block_order": [
+        "text_afydFM"
+      ],
+      "name": "Marquee Note",
+      "settings": {
+        "bg": "{{ settings.color_palette.color3 }}",
+        "text_color": "#ffffff",
+        "direction": "left",
+        "speed": 40
+      }
+    },
+    "header_section": {
+      "type": "header",
+      "blocks": {
+        "header-logo": {
+          "type": "_header-logo",
+          "static": true,
+          "settings": {
+            "hide_logo_on_home_page": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        },
+        "header-menu": {
+          "type": "_header-menu",
+          "static": true,
+          "settings": {
+            "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "{{ settings.color_palette.foreground }}",
+            "type_font_primary_size": "custom",
+            "custom_top_level_font_size": 13,
+            "mobile_menu_font_size": 18,
+            "menu_font_style": "regular",
+            "custom_submenu_font_size": 12,
+            "type_font_primary_link": "body",
+            "type_case_primary_link": "uppercase",
+            "menu_style": "featured_products",
+            "featured_products_aspect_ratio": "4 / 5",
+            "featured_collections_aspect_ratio": "16 / 9",
+            "image_border_radius": 0,
+            "mobile_menu": "mobile-menue-collections",
+            "drawer_background_color": "",
+            "drawer_text_color": "",
+            "show_drawer_slider": true,
+            "drawer_slider_aspect_ratio": "1 / 1",
+            "drawer_slider_border_radius": 10,
+            "drawer_slider_autoplay": true,
+            "drawer_slider_interval": 4,
+            "drawer_slider_dot_color": "#1a1a1a",
+            "drawer_slider_text_color": "#ffffff",
+            "drawer_slide1_image": "shopify://shop_images/799_1.gif",
+            "drawer_slide1_link": "",
+            "drawer_slide1_heading": "sasasas",
+            "drawer_slide1_subheading": "sasasa",
+            "drawer_slide2_image": "shopify://shop_images/TP4087T-2_2476ebb9-f2e7-469b-a4b9-311a1a26f87b.jpg",
+            "drawer_slide2_link": "",
+            "drawer_slide2_heading": "sasasa",
+            "drawer_slide2_subheading": "assasas",
+            "drawer_slide3_image": "shopify://shop_images/799_1.gif",
+            "drawer_slide3_link": "",
+            "drawer_slide3_heading": "sasasas",
+            "drawer_slide3_subheading": "sasasas",
+            "drawer_slide4_image": "shopify://shop_images/999_1.gif",
+            "drawer_slide4_link": "",
+            "drawer_slide4_heading": "sasasa",
+            "drawer_slide4_subheading": "asasas",
+            "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.color1 }}",
+            "text_color_navigation_bar": "",
+            "drawer_accordion": true,
+            "drawer_accordion_expand_first": false,
+            "drawer_dividers": true,
+            "show_drawer_badges": true,
+            "drawer_badges_section_bg": "#ffffff",
+            "drawer_badges_section_border": "#ffffff",
+            "drawer_badges_card_bg": "#ffffff",
+            "drawer_badges_border_color": "#ffffff",
+            "drawer_badges_title_color": "#1a1a1a",
+            "drawer_badges_subtitle_color": "#666666",
+            "drawer_badges_icon_bg": "#faf6ee",
+            "drawer_badges_icon_color": "#1a1a1a",
+            "drawer_badges_dot_active_color": "#1a1a1a",
+            "drawer_badge1_title": "Free shipping",
+            "drawer_badge1_subtitle": "India, orders ₹6,999++",
+            "drawer_badge1_link": "",
+            "drawer_badge2_title": "Quick dispatch",
+            "drawer_badge2_subtitle": "In 1–5 working days",
+            "drawer_badge2_link": "",
+            "drawer_badge3_title": "Secure checkout",
+            "drawer_badge3_subtitle": "Prepaid orders",
+            "drawer_badge3_link": "",
+            "drawer_badge4_title": "WhatsApp help",
+            "drawer_badge4_subtitle": "+91 93080 66552",
+            "drawer_badge4_phone": "919308066552",
+            "drawer_badge4_icon_color": "#25d366",
+            "show_drawer_bottom_bar": true,
+            "drawer_bottom_bg": "#ffffff",
+            "drawer_bottom_border_color": "#eeeeee",
+            "show_drawer_account": true,
+            "drawer_account_text": "Account",
+            "drawer_account_link": "",
+            "drawer_account_text_color": "#1a1a1a",
+            "drawer_account_icon_color": "#e69a10",
+            "show_drawer_socials": true,
+            "drawer_socials_icon_color": "#1a1a1a",
+            "drawer_show_facebook": true,
+            "drawer_facebook_link": "",
+            "drawer_show_pinterest": true,
+            "drawer_pinterest_link": "",
+            "drawer_show_instagram": true,
+            "drawer_instagram_link": "",
+            "drawer_show_linkedin": true,
+            "drawer_linkedin_link": "",
+            "drawer_show_youtube": true,
+            "drawer_youtube_link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "settings": {
+        "logo_position": "center",
+        "menu_position": "left",
+        "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
+        "show_search": true,
+        "search_position": "right",
+        "search_row": "top",
+        "show_country": true,
+        "country_selector_style": false,
+        "show_language": true,
+        "localization_font": "heading",
+        "localization_font_size": "0.875rem",
+        "localization_position": "right",
+        "localization_row": "top",
+        "section_width": "page-width",
+        "section_height": "standard",
+        "enable_sticky_header": "always",
+        "divider_width": 0,
+        "divider_size": "page-width",
+        "divider_color": "",
+        "border_width": 0,
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
+        "background_color_top": "{{ settings.color_palette.background }}",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
+        "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
+        "enable_transparent_header_product": false,
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
+      }
+    }
+  },
+  "order": [
+    "marqueenote_gU4Lir",
+    "header_section"
+  ]
+}

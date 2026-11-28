@@ -1,0 +1,258 @@
+{% comment %}
+  Section: Best Price Badges (Diwali / Festive Sale)
+  Customizer-ready: Merchant can add images, links, heading, and background color.
+{% endcomment %}
+
+<div class="bds-prices" style="--bds-pt: {{ section.settings.padding_top }}px; --bds-pb: {{ section.settings.padding_bottom }}px; --bds-bg: {{ section.settings.background_color }};">
+  <div class="bds-prices__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="bds-heading" id="BdsPrices-{{ section.id }}">
+        <span>{{ section.settings.heading }}</span>
+       
+      </h2>
+    {%- endif -%}
+
+    <div class="bds-prices__grid">
+      {%- for block in section.blocks -%}
+        <div class="bds-price-item" {{ block.shopify_attributes }}>
+          <a class="bds-price" href="{{ block.settings.link | default: '#' }}">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                class: 'bds-image',
+                alt: block.settings.title | default: block.settings.image.alt,
+                widths: '300, 600, 900, 1200',
+                sizes: '(max-width: 767px) 28vw, 15vw'
+              }}
+            {%- else -%}
+              {% comment %} Placeholder jab tak aap customizer se image upload nahi karte {% endcomment %}
+              <div class="bds-placeholder">
+                <span class="bds-placeholder__sub">UNDER</span>
+                <span class="bds-placeholder__price">{{ block.settings.title | default: '999' }}</span>
+              </div>
+            {%- endif -%}
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .bds-prices {
+    padding-top: var(--bds-pt, 36px);
+    padding-bottom: var(--bds-pb, 36px);
+    {% comment %} background-color: var(--bds-bg, #faf6ee); {% endcomment %}
+    text-align: center;
+    width: 100%;
+  }
+
+  .bds-prices__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .bds-prices .bds-heading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 26px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+  }
+
+  .bds-prices .bds-firework {
+    display: inline-flex;
+    align-items: center;
+  }
+
+.bds-prices__grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 11%;
+    width: 90%;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+  .bds-price-item {
+    display: inline-block;
+  }
+
+  .bds-price {
+    display: block;
+    width: 255px;
+ 
+    max-width: 100%;
+    text-decoration: none;
+    transition: transform 0.25s ease;
+  }
+
+  .bds-price:hover {
+    transform: translateY(-5px) scale(1.03);
+  }
+
+  .bds-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    object-fit: contain;
+  }
+
+  /* Placeholder style if image is not uploaded yet */
+  .bds-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #4a0d3a;
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f7d070;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .bds-placeholder__sub {
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  .bds-placeholder__price {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 767px) {
+    .bds-prices {
+      padding-top: 22px;
+      padding-bottom: 22px;
+    }
+
+    .bds-prices .bds-heading {
+      font-size: 16px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .bds-prices__grid {
+      gap: 10px;
+      flex-wrap: nowrap;
+    }
+
+    .bds-price {
+      width: calc(33.333vw - 16px);
+      min-width: 80px;
+    }
+
+    .bds-placeholder__sub {
+      font-size: 10px;
+    }
+
+    .bds-placeholder__price {
+      font-size: 22px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Price Badges",
+  "tag": "section",
+  "class": "section-price-badges",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "DIWALI'S BEST PRICES"
+    },
+   
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAF6EE"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "price_card",
+      "name": "Price Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Image / Banner"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection / Product Link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Price Label / Alt Text",
+          "default": "699"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Price Badges",
+      "blocks": [
+        {
+          "type": "price_card",
+          "settings": {
+            "title": "699"
+          }
+        },
+        {
+          "type": "price_card",
+          "settings": {
+            "title": "799"
+          }
+        },
+        {
+          "type": "price_card",
+          "settings": {
+            "title": "999"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

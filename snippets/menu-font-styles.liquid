@@ -1,0 +1,42 @@
+{%- doc -%}
+  Derives CSS variables from the menu typography settings for 1st level/main menu items.
+
+  @param {object} settings - The block settings object containing typography settings.
+  @param {string} menu_type - The menu type: 'drawer' or 'mega_menu'.
+{%- enddoc -%}
+
+{%- liquid
+  assign top_level_size = settings.type_font_primary_size
+  if top_level_size == 'custom'
+    if settings.custom_top_level_font_size != blank and settings.custom_top_level_font_size > 0
+      assign top_level_size = settings.custom_top_level_font_size | append: 'px'
+    else
+      assign top_level_size = '1rem'
+    endif
+  endif
+
+  if menu_type == 'drawer'
+    if settings.mobile_menu_font_size != blank and settings.mobile_menu_font_size > 0
+      assign drawer_top_level_size = settings.mobile_menu_font_size | append: 'px'
+      assign drawer_top_level_line_height = '1.3'
+    else
+      assign drawer_top_level_size = 'var(--menu-font-2xl--size)'
+      assign drawer_top_level_line_height = 'var(--menu-font-2xl--line-height)'
+    endif
+  endif
+-%}
+
+--menu-top-level-font-family: var(--font-{{ settings.type_font_primary_link }}--family);
+--menu-top-level-font-size-desktop: {{ top_level_size }};
+--menu-top-level-font-style: var(--font-{{- settings.type_font_primary_link -}}--style);
+--menu-top-level-font-weight: var(--font-{{- settings.type_font_primary_link -}}--weight);
+--menu-top-level-font-case: {%- if settings.type_case_primary_link == 'uppercase' %}uppercase{% else %}none{% endif -%};
+{% if menu_type == 'drawer' %}
+  --menu-top-level-font-size: {{ drawer_top_level_size }};
+  --menu-top-level-font-line-height: {{ drawer_top_level_line_height }};
+{% else %}
+  --menu-top-level-font-size: {{ top_level_size }};
+  --menu-top-level-font-line-height: var(--menu-font-sm--line-height);
+{% endif %}
+--menu-top-level-font-color: var(--color-foreground);
+--menu-top-level-font-color-rgb: var(--color-foreground-rgb);
